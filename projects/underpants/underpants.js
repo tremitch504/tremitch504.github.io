@@ -121,6 +121,21 @@ _.first = function(array, number){
 *   _.last(["a", "b", "c"], 2) -> ["b", "c"]
 */
 
+_.last = function(array, number){
+let newArr = [];
+    if(number < 0 || _.typeOf(array) !== "array"){
+        return [];
+    } else if(number > array.length){
+        return array;
+    } else if(isNaN(number)){
+        return array[array.length - 1];
+    }
+    //iterate over the given array and push the values inside the empty array
+    for(let i = array.length - number; i < array.length; i++){
+        newArr.push(array[i]);
+    }
+    return newArr;
+}
 
 /** _.indexOf
 * Arguments:
@@ -138,7 +153,14 @@ _.first = function(array, number){
 *   _.indexOf(["a","b","c"], "d") -> -1
 */
 
-
+_.indexOf = function(array, value){
+    for(let i = 0; i < array.length; i++){
+        if(array[i] === value){
+            return i;
+        }
+    }
+    return -1;
+}
 /** _.contains
 * Arguments:
 *   1) An array
@@ -154,6 +176,9 @@ _.first = function(array, number){
 *   _.contains([1,"two", 3.14], "two") -> true
 */
 
+_.contains = function(array, value){
+    return array.includes(value) ? true : false;
+};
 
 /** _.each
 * Arguments:
@@ -171,6 +196,17 @@ _.first = function(array, number){
 *      -> should log "a" "b" "c" to the console
 */
 
+_.each = function(collection, callback){
+    if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+            callback(collection[i], i, collection);
+        }
+    } else if(typeof collection === "object"){
+        for(let key in collection){
+            callback(collection[key], key, collection);
+        }
+    }
+}
 
 /** _.unique
 * Arguments:
@@ -181,7 +217,15 @@ _.first = function(array, number){
 * Examples:
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
-
+_.unique = function(array){
+    let newArr = [];
+    for(let i = 0; i < array.length; i++){
+        if(!newArr.includes(array[_.indexOf(array, array[i])])){
+            newArr.push(array[i]);
+        }
+    }
+    return newArr;
+}
 
 /** _.filter
 * Arguments:
@@ -199,6 +243,15 @@ _.first = function(array, number){
 *   use _.each in your implementation
 */
 
+_.filter = function(array, callback){
+    let newArr = [];
+    _.each(array, function(element, i, array){
+        if(callback(element, i,  array) === true){
+            newArr.push(element);
+        }
+    });
+    return newArr;
+}
 
 /** _.reject
 * Arguments:
@@ -212,6 +265,15 @@ _.first = function(array, number){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+_.reject = function(array, callback){
+    let newArr = [];
+    _.each(array, function(element, i, array){
+        if(callback(element, i,  array) === false){
+            newArr.push(element);
+        }
+    });
+    return newArr;
+}
 
 
 /** _.partition
@@ -232,7 +294,18 @@ _.first = function(array, number){
 *   }); -> [[2,4],[1,3,5]]
 }
 */
-
+_.partition = function(array, callback){
+    let newArr = [[], []];
+    _.each(array, function(element, key, array){
+       
+        if(callback(element, key, array) === true){
+            newArr[0].push(element);
+        } else if(callback(element, key, array) === false){
+            newArr[1].push(element)     
+        }
+    });
+    return newArr;
+}
 
 /** _.map
 * Arguments:
@@ -249,7 +322,13 @@ _.first = function(array, number){
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = function(collection, callback){
+    let newArr = [];
+    _.each(collection, function(element, i, collection){
+        newArr.push(callback(element, i, collection))
+    });
+    return newArr;
+}
 
 /** _.pluck
 * Arguments:
@@ -262,6 +341,14 @@ _.first = function(array, number){
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(array, property){
+    let newArr = [];
+    _.map(array, function(element, i, array){
+        newArr.push(array[i][property]);
+    });
+    return newArr;
+    
+}
 
 /** _.every
 * Arguments:
@@ -284,7 +371,19 @@ _.first = function(array, number){
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
-
+_.every = function(collection, callback){
+    let myBool = true;
+    _.each(collection, function(element, i, collection){
+        if(typeof callback === "function"){
+            if(!callback(element, i, collection)){
+                myBool = false;
+            }
+        } else if(!element){
+            myBool = false;
+        }
+    });
+    return myBool;
+};
 /** _.some
 * Arguments:
 *   1) A collection
@@ -305,7 +404,20 @@ _.first = function(array, number){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
-
+_.some = function(collection, callback){
+    let myBool = false;
+    
+    _.each(collection, function(element, i, collection){
+        if(typeof callback === "function"){
+            if(callback(element, i, collection)){
+                myBool = true;
+            }
+        } else if(element){
+            myBool = true;
+        }
+    });
+    return myBool;
+}
 
 /** _.reduce
 * Arguments:
@@ -326,7 +438,20 @@ _.first = function(array, number){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
-
+_.reduce = function(array, callback, seed){
+    let previous = seed;
+    if(seed === undefined){
+        previous = array[0];
+        for(let i = 1; i < array.length; i++){
+            previous = callback(previous, array[i], i);
+        }
+        return previous;
+    }
+    for(let i = 0; i < array.length; i++){
+        previous = callback(previous, array[i], i)
+    }
+    return previous; 
+}
 /** _.extend
 * Arguments:
 *   1) An Object
@@ -341,7 +466,10 @@ _.first = function(array, number){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
-
+_.extend = function(object, ...object1){
+    Object.assign(object, ...object1);
+    return object;
+}
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
