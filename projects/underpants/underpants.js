@@ -134,7 +134,7 @@ let newArr = [];
     for(let i = array.length - number; i < array.length; i++){
         newArr.push(array[i]);
     }
-    return newArr;
+    return newArr; 
 }
 
 /** _.indexOf
@@ -296,11 +296,11 @@ _.reject = function(array, callback){
 */
 _.partition = function(array, callback){
     let newArr = [[], []];
-    _.each(array, function(element, key, array){
+    _.each(array, function(element, i, array){
        
-        if(callback(element, key, array) === true){
+        if(callback(element, i, array) === true){
             newArr[0].push(element);
-        } else if(callback(element, key, array) === false){
+        } else if(callback(element, i, array) === false){
             newArr[1].push(element)     
         }
     });
