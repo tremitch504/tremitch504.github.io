@@ -20,10 +20,17 @@
      console.log(count);
      count++
  }
+
  
- 
- //2. For loop: This loop is useful to iterate over Arrays. There have statements that goes in parenthses.
- 
+ //2. For loop: In a for loop, an expression is ran once before a loop starts. A variable is declared to have a starting point.
+ //Also has a testing condition that will returns a boolean. This also checks when to stop iterating.
+ //In a for loop we can Increment or decrement to have some type of iteration going on inside our loop.
+ //This loop is useful to iterate over Arrays. There have statements that goes in parenthses.
+ //When the test condition returns false, the loop will end.
+ //I can print out the numbers 1 through 10 with a for loop.
+ for(let i = 1; i <= 10; i++){
+  console.log(i); // prints numbers from 1 to 10
+ }
  //Example //
  //this for loop will start at the 0 index and increment having access to all the values in the array
  //stopping at the length of the array
@@ -34,7 +41,11 @@
      console.log(myRappers[i]);
  }
  
- //3. For in loop: This loop iterates over an object to get access to each key value pair
+ //3. For in loop: We can kickoff a for in loop with a variable like our for loop, and an object or name of object so the for in loop can iterate over the object.
+ //the variable reperesents each property or key "IN" the object that the for in loop is iterating over
+ //example: for(let key in object) key is the varaible.
+ 
+ //This loop iterates over an object to get access to each key value pair
  //This loop will take each key and concate it with the ":" and the value of that key
  let spotify = {artist: "21 Savage", song: "Bank Account", year: "2017"};
  

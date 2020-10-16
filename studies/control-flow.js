@@ -19,7 +19,8 @@
  
  //What if the if statement returns false??
  
- //Else if statement: thsi will execute when the condition before it is not true //
+ //Else if statement: We can have multiple else if statements, the first one that returns true will execute.
+ // so if the condition that is previous is false, we can use the else if statements.
  
  else if(callOfDuty === "Code War"){
      console.log("what is the code?") //this condition returns false

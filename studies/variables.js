@@ -63,3 +63,9 @@ So it must be assigned to a value once it is declared.
 
 Const variables is blocked scoped like let, not available outside the block of code because they are not hoisted.
 */
+
+//console.log(runShrek);
+const runShrek = " No Donkey!"; //will get an error that runsShrek is not defined
+
+//runShrek = "There is A Dragon" // get type error, cannot reassign
+

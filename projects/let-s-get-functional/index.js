@@ -81,6 +81,9 @@ var averageBalance = function(array){
 }
 
 var firstLetterCount = function(array, char){
+    //use reduce function to iterate
+    //check if the current element name first letter is the same as given letter
+    //if so increment
     return _.reduce(customers, function(prev, current){
         if(current.name[0].toLowerCase() === char.toLowerCase()){
             prev++;
@@ -90,6 +93,12 @@ var firstLetterCount = function(array, char){
 };
 
 var friendFirstLetterCount = function(array, customer, letter){
+    //using a starting point
+    //use each function to iterate over the array
+    //if the element name is same as the givne customer
+    //use the filter function to iterate over the friends array
+    //see if the first letter of the element name is the same as the given letter
+    //if so increment
     let count = 0;
     _.each(array, function(element, i, collection){
         if(element.name === customer){
@@ -144,6 +153,11 @@ var topThreeTags = function(array){
 }
 
 var genderCount = function(array){
+    //use reduce function to iterate
+    //if the final object as its property of the current gender value
+    //increment its count as its value
+    //otherwise assign 1 to its value
+    //return the final object
     return _.reduce(array, function(final, current){
         let gender = current.gender;
         if(final.hasOwnProperty(gender)){

@@ -14,6 +14,15 @@
  * 
  * 5. Closures: Closures are formed when a function reference variables in its parent scope.
  * So when calling a function, it has access to variables in the parent scope.
+ * example: the function captainHook is using the variable disneyMovie from the peterPan function
+ * function peterPan(){
+  let disneyMovie = "Flight to Wonderland";
+  return function captainHook(){
+   console.log(disneyMovie);
+  }
+ }
+ 
+ * 
  * 
  * 6. Scopes: There are 2 types of scopes, theres Global scope and Local scope.
  * Anything outside of a function's code of block is global scope. Anything local or inside the function's block of code is local scope.
@@ -47,3 +56,23 @@
  console.log(goViral); //this will print  Big Bang
  goPurple() //have access to goViral and reassign it with St. Aug
  console.log(goViral); //will print St. Aug
+ 
+ //What exactly is the difference between parameters and arguments outside of the technical terms?
+ /**
+  * A function will take an input or potentail value, so parameters are its placeholders, which is what the function looks for after its been called.
+  * Arguments are the actual values that are placed inside the function call.
+  * 
+  * We can define parameters by giving them a name and placing them inside the parenthese next with the function key word or definition.
+  * function myFunc(param, param)
+  */
+ 
+ //how does the return statement relate to function?
+ /**
+  * We can get an output from a funciton by returning whatever value we want to output.
+  * The return statement will stop the execution of a function and return that value that is being returned.
+  * Functions have an option to have a return statement.
+  * 
+  */
+ 
+ 
+ 

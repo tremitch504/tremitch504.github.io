@@ -43,9 +43,18 @@ console.log(myName) // this prints undefined because the variable is not assigne
 // Array: a collection which is ordered in position by 0 index. 
 var myArray = ["Cam Newton", 1, true, {}];
 
+//Access Arrays: Using bracket notation
+//Can access the number 1 in the array by using an index
+console.log(myArray[1]); //prints 1
+
+
 //Object: Contains any number of key value pairs. //
 
 var myObject = {toppings: "Meat Lovers", brand: "Dominos"};
+//Acceess Objects: Using bracket and dot notation
+//can access the key values from an object by:
+console.log(myObject["brand"]); //prints Dominos
+console.log(myObject.toppings); //prints Meat Lovers
 
 //Function: a reusable code,contains statements. //
 function myWorld(string, string2){
